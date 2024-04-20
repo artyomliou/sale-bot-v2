@@ -113,7 +113,7 @@ func main() {
 		allCrawlers = append(allCrawlers, adapter.GetCrawler())
 	}
 
-	ticker := time.NewTicker(1 * time.Minute)
+	ticker := time.NewTicker(2 * time.Minute)
 	for {
 		crawledPages := []*crawlers.Page{}
 		notifyPages := []*crawlers.Page{}
