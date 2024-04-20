@@ -1,0 +1,452 @@
+{
+  "status": 1,
+  "data": {
+    "topData": [],
+    "biddings": [],
+    "data": [
+      {
+        "title": "『住商集賢小林』▲捷運家樂福▲全新兩房▲",
+        "type": "1",
+        "post_id": 16323183,
+        "kind_name": "整層住家",
+        "room_str": "2房1廳",
+        "floor_str": "3F/5F",
+        "community": "",
+        "price": "24,000",
+        "price_unit": "元/月",
+        "photo_list": [
+          "https://img2.591.com.tw/house/2024/04/17/171334345098269602.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2024/04/17/171334345100278005.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2023/07/15/168939357256905100.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2023/07/15/168939357259543309.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2023/07/15/168939357271656107.jpg!510x400.jpg",
+          "https://img1.591.com.tw/house/2023/07/15/168939357215578106.jpg!510x400.jpg"
+        ],
+        "section_name": "蘆洲區",
+        "street_name": "信義路",
+        "location": "蘆洲區-信義路222巷",
+        "rent_tag": [
+          {
+            "id": 2,
+            "name": "近捷運"
+          },
+          {
+            "id": 3,
+            "name": "拎包入住"
+          },
+          {
+            "id": 4,
+            "name": "近商圈"
+          },
+          {
+            "id": 5,
+            "name": "隨時可遷入"
+          },
+          {
+            "id": 6,
+            "name": "可開伙"
+          },
+          {
+            "id": 7,
+            "name": "可養寵物"
+          }
+        ],
+        "area": "15",
+        "role_name": "仲介",
+        "contact": "林先生",
+        "refresh_time": "3天前",
+        "yesterday_hit": 119,
+        "is_vip": 0,
+        "is_combine": 2,
+        "hurry": 0,
+        "is_socail": 0,
+        "surrounding": {
+          "type": "subway_station",
+          "desc": "距徐匯中學站",
+          "distance": "675公尺"
+        },
+        "discount_price_str": "",
+        "cases_id": 0,
+        "is_video": 0,
+        "preferred": 1,
+        "cid": 0
+      },
+      {
+        "title": "可寵丨全新裝潢兩房丨有陽台",
+        "type": "1",
+        "post_id": 16463276,
+        "kind_name": "整層住家",
+        "room_str": "2房1廳",
+        "floor_str": "5F/5F",
+        "community": "",
+        "price": "26,000",
+        "price_unit": "元/月",
+        "photo_list": [
+          "https://img1.591.com.tw/house/2024/04/11/171276788735300108.jpg!510x400.jpg",
+          "https://img1.591.com.tw/house/2024/04/11/171276788704565807.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2024/04/11/171276788748579103.jpg!510x400.jpg",
+          "https://img1.591.com.tw/house/2024/04/11/171276788751993207.jpg!510x400.jpg",
+          "https://img1.591.com.tw/house/2024/04/11/171276788694401807.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2024/04/11/171276788692348307.jpg!510x400.jpg",
+          "https://img1.591.com.tw/house/2024/04/11/171276788694850204.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2024/04/11/171276788696651200.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2024/04/11/171276788726184603.jpg!510x400.jpg",
+          "https://img1.591.com.tw/house/2024/04/11/171276788726897508.jpg!510x400.jpg",
+          "https://img1.591.com.tw/house/2024/04/11/171276788733723407.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2024/04/11/171276788754570405.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2024/04/11/171276788724237601.jpg!510x400.jpg",
+          "https://img1.591.com.tw/house/2024/04/11/171276788718882906.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2024/04/11/171276788706765100.jpg!510x400.jpg"
+        ],
+        "section_name": "蘆洲區",
+        "street_name": "信義路",
+        "location": "蘆洲區-信義路222巷32弄",
+        "rent_tag": [
+          {
+            "id": 2,
+            "name": "近捷運"
+          },
+          {
+            "id": 16,
+            "name": "新上架"
+          },
+          {
+            "id": 3,
+            "name": "拎包入住"
+          },
+          {
+            "id": 5,
+            "name": "隨時可遷入"
+          },
+          {
+            "id": 6,
+            "name": "可開伙"
+          },
+          {
+            "id": 7,
+            "name": "可養寵物"
+          }
+        ],
+        "area": "20",
+        "role_name": "仲介",
+        "contact": "蕭小姐",
+        "refresh_time": "12分鐘內",
+        "yesterday_hit": 68,
+        "is_vip": 1,
+        "is_combine": 0,
+        "hurry": 0,
+        "is_socail": 0,
+        "surrounding": {
+          "type": "subway_station",
+          "desc": "距徐匯中學站",
+          "distance": "524公尺"
+        },
+        "discount_price_str": "",
+        "cases_id": 0,
+        "is_video": 0,
+        "preferred": 1,
+        "cid": 0
+      },
+      {
+        "title": "送一個月*可租補近捷運可寵♫含網路第四台",
+        "type": "1",
+        "post_id": 16444889,
+        "kind_name": "整層住家",
+        "room_str": "3房2廳",
+        "floor_str": "6F/6F",
+        "community": "",
+        "price": "24,844",
+        "price_unit": "元/月",
+        "photo_list": [
+          "https://img1.591.com.tw/house/2021/03/05/161492110938486402.jpg!510x400.jpg",
+          "https://img1.591.com.tw/house/2019/08/19/156618908046870103.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2019/08/19/156618908327496401.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2021/03/05/161492099954605901.jpg!510x400.jpg",
+          "https://img1.591.com.tw/house/2021/03/05/161492100046242106.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2021/03/05/161492108541901205.jpg!510x400.jpg",
+          "https://img1.591.com.tw/house/2021/03/05/161492108451040502.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2021/03/05/161492108682908403.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2021/03/05/161492108635252206.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2021/03/05/16149211379401309.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2021/03/05/161492113968174406.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2021/03/05/161492113869783909.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2021/03/05/161492116487960106.jpg!510x400.jpg"
+        ],
+        "section_name": "蘆洲區",
+        "street_name": "保和街",
+        "location": "蘆洲區-保和街47巷",
+        "rent_tag": [
+          {
+            "id": 1,
+            "name": "屋主直租"
+          },
+          {
+            "id": 2,
+            "name": "近捷運"
+          },
+          {
+            "id": 3,
+            "name": "拎包入住"
+          },
+          {
+            "id": 4,
+            "name": "近商圈"
+          },
+          {
+            "id": 5,
+            "name": "隨時可遷入"
+          },
+          {
+            "id": 6,
+            "name": "可開伙"
+          }
+        ],
+        "area": "29",
+        "role_name": "屋主",
+        "contact": "林小姐",
+        "refresh_time": "12分鐘內",
+        "yesterday_hit": 111,
+        "is_vip": 1,
+        "is_combine": 0,
+        "hurry": 0,
+        "is_socail": 0,
+        "surrounding": {
+          "type": "subway_station",
+          "desc": "距三民高中站",
+          "distance": "357公尺"
+        },
+        "discount_price_str": "",
+        "cases_id": 0,
+        "is_video": 0,
+        "preferred": 0,
+        "cid": 0
+      },
+      {
+        "title": "⚠️蘆洲信義路公寓可入戶籍⚠️買房找樺樺",
+        "type": "1",
+        "post_id": 16397882,
+        "kind_name": "整層住家",
+        "room_str": "3房2廳",
+        "floor_str": "5F/5F",
+        "community": "",
+        "price": "22,000",
+        "price_unit": "元/月",
+        "photo_list": [
+          "https://img1.591.com.tw/house/2024/04/04/171220833943244905.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2024/04/04/171220833951606904.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2024/04/04/171220833946797706.jpg!510x400.jpg",
+          "https://img1.591.com.tw/house/2024/04/04/171220833953764100.jpg!510x400.jpg",
+          "https://img1.591.com.tw/house/2024/04/04/171220833963301303.jpg!510x400.jpg",
+          "https://img1.591.com.tw/house/2024/04/04/171220833966442505.jpg!510x400.jpg",
+          "https://img1.591.com.tw/house/2024/04/04/171220833972935002.jpg!510x400.jpg",
+          "https://img1.591.com.tw/house/2024/04/04/171220833973097000.jpg!510x400.jpg",
+          "https://img1.591.com.tw/house/2024/04/04/171220833979630707.jpg!510x400.jpg",
+          "https://img1.591.com.tw/house/2024/04/04/171220833981719407.jpg!510x400.jpg"
+        ],
+        "section_name": "蘆洲區",
+        "street_name": "信義路",
+        "location": "蘆洲區-信義路266巷",
+        "rent_tag": [
+          {
+            "id": 2,
+            "name": "近捷運"
+          },
+          {
+            "id": 3,
+            "name": "拎包入住"
+          },
+          {
+            "id": 6,
+            "name": "可開伙"
+          },
+          {
+            "id": 7,
+            "name": "可養寵物"
+          }
+        ],
+        "area": "40",
+        "role_name": "仲介",
+        "contact": "何先生",
+        "refresh_time": "16天前",
+        "yesterday_hit": 41,
+        "is_vip": 0,
+        "is_combine": 0,
+        "hurry": 0,
+        "is_socail": 0,
+        "surrounding": {
+          "type": "subway_station",
+          "desc": "距三民高中站",
+          "distance": "562公尺"
+        },
+        "discount_price_str": "",
+        "cases_id": 0,
+        "is_video": 0,
+        "preferred": 0,
+        "cid": 0
+      },
+      {
+        "title": "蘆洲信義路大空間生活便利宅",
+        "type": "1",
+        "post_id": 16381987,
+        "kind_name": "整層住家",
+        "room_str": "3房2廳",
+        "floor_str": "5F/5F",
+        "community": "信義路生活好便利",
+        "price": "22,000",
+        "price_unit": "元/月",
+        "photo_list": [
+          "https://img1.591.com.tw/house/2009/03/10/123665474222139903.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2009/03/10/123665474246281604.jpg!510x400.jpg",
+          "https://img1.591.com.tw/house/2022/08/19/166086409093388106.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2022/08/19/166086413263630006.jpg!510x400.jpg",
+          "https://img1.591.com.tw/house/2022/08/19/166089248718648007.jpg!510x400.jpg",
+          "https://img1.591.com.tw/house/2022/08/19/166089254516634706.jpg!510x400.jpg",
+          "https://img1.591.com.tw/house/2022/08/19/166089260726445908.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2022/08/19/166089264731099801.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2022/08/19/166089271778227008.jpg!510x400.jpg"
+        ],
+        "section_name": "蘆洲區",
+        "street_name": "信義路",
+        "location": "蘆洲區-信義路266巷16號",
+        "rent_tag": [
+          {
+            "id": 1,
+            "name": "屋主直租"
+          },
+          {
+            "id": 2,
+            "name": "近捷運"
+          },
+          {
+            "id": 3,
+            "name": "拎包入住"
+          },
+          {
+            "id": 4,
+            "name": "近商圈"
+          },
+          {
+            "id": 5,
+            "name": "隨時可遷入"
+          },
+          {
+            "id": 6,
+            "name": "可開伙"
+          }
+        ],
+        "area": "40",
+        "role_name": "屋主",
+        "contact": "林先生",
+        "refresh_time": "19天前",
+        "yesterday_hit": 63,
+        "is_vip": 0,
+        "is_combine": 0,
+        "hurry": 0,
+        "is_socail": 0,
+        "surrounding": {
+          "type": "subway_station",
+          "desc": "距三民高中站",
+          "distance": "451公尺"
+        },
+        "discount_price_str": "",
+        "cases_id": "",
+        "is_video": 0,
+        "preferred": 0,
+        "cid": 0
+      },
+      {
+        "title": "『住商集賢小林』▲捷運家樂福▲全新兩房▲",
+        "type": "1",
+        "post_id": 16323188,
+        "kind_name": "整層住家",
+        "room_str": "2房1廳",
+        "floor_str": "3F/5F",
+        "community": "",
+        "price": "24,500",
+        "price_unit": "元/月",
+        "photo_list": [
+          "https://img1.591.com.tw/house/2024/03/22/171110510062832809.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2024/03/22/171110510057883300.jpg!510x400.jpg",
+          "https://img2.591.com.tw/house/2024/03/22/171110510059472503.jpg!510x400.jpg",
+          "https://img1.591.com.tw/house/2023/07/15/168939357259543309.jpg!510x400.jpg",
+          "https://img1.591.com.tw/house/2023/07/15/168939357271656107.jpg!510x400.jpg",
+          "https://img1.591.com.tw/house/2023/07/15/168939357215578106.jpg!510x400.jpg"
+        ],
+        "section_name": "蘆洲區",
+        "street_name": "信義路",
+        "location": "蘆洲區-信義路222巷",
+        "rent_tag": [
+          {
+            "id": 2,
+            "name": "近捷運"
+          },
+          {
+            "id": 3,
+            "name": "拎包入住"
+          },
+          {
+            "id": 4,
+            "name": "近商圈"
+          },
+          {
+            "id": 5,
+            "name": "隨時可遷入"
+          },
+          {
+            "id": 6,
+            "name": "可開伙"
+          },
+          {
+            "id": 7,
+            "name": "可養寵物"
+          }
+        ],
+        "area": "15",
+        "role_name": "仲介",
+        "contact": "林先生",
+        "refresh_time": "29天前",
+        "yesterday_hit": 24,
+        "is_vip": 0,
+        "is_combine": 0,
+        "hurry": 0,
+        "is_socail": 0,
+        "surrounding": {
+          "type": "subway_station",
+          "desc": "距徐匯中學站",
+          "distance": "675公尺"
+        },
+        "discount_price_str": "",
+        "cases_id": 0,
+        "is_video": 0,
+        "preferred": 1,
+        "cid": 0
+      }
+    ],
+    "page": "<a class=\"pagePrev first\"><span>上一頁</span></a><span class=\"pageCurrent\">1</span><a class=\"pageNext last\"><span>下一頁</span></a><span class=\"TotalRecord\">&nbsp;&nbsp;共 <span class=\"R\">6 </span>筆</span>"
+  },
+  "records": "6",
+  "is_recom": 0,
+  "deal_recom": [],
+  "online_social_user": 0,
+  "bluekai_data": {
+    "region_id": "3",
+    "section_id": "47",
+    "sale_price": 0,
+    "rental_price": 0,
+    "unit_price_per_ping": "",
+    "room": "",
+    "shape": "",
+    "mrt_city": "",
+    "mrt_line": "",
+    "tag": 0,
+    "type": "rent",
+    "kind": "1",
+    "page": "rent_list"
+  },
+  "recommend": [],
+  "seo": {
+    "title": "蘆洲區租屋 | 新北市房屋出租 - 591租屋網",
+    "keywords": "蘆洲區租屋,蘆洲區租屋網,蘆洲區房屋出租,新北市蘆洲區租屋網",
+    "description": "591租屋網，出租就是快！為您提供新北市蘆洲區租屋資訊，每日實時更新，人工審核。新北市蘆洲區租房子、刊登租屋資訊，就上591！"
+  }
+}
