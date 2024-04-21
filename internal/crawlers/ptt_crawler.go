@@ -3,6 +3,7 @@ package crawlers
 import (
 	"artyomliou/sale-bot-v2/internal/utils"
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"net/url"
@@ -67,7 +68,7 @@ func (c *PttCrawler) Crawl(ctx context.Context, results *[]*Page) {
 		}
 		title := s.Find("a").Text()
 		crawledPages = append(crawledPages, &Page{
-			ID:    link,
+			ID:    fmt.Sprintf("ptt-%s", link),
 			Link:  PttBaseUrl + link,
 			Title: title,
 		})
