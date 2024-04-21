@@ -13,7 +13,8 @@ type PttCrawlerDcSaleAdapter struct {
 
 func (a PttCrawlerDcSaleAdapter) GetCrawler() crawlers.Crawler {
 	crawler := crawlers.NewPttCrawler()
-	crawler.Url = "https://www.ptt.cc/bbs/dc_sale/index.html"
+	crawler.BaseUrl = crawlers.PttBaseUrl
+	crawler.Board = "dc_sale"
 	crawler.Patterns = []*regexp.Regexp{}
 
 	keywords := strings.Join(a.Keywords, "|")

@@ -23,7 +23,7 @@ func TestPttCrawler(t *testing.T) {
 	defer svr.Close()
 
 	c := crawlers.PttCrawler{
-		Url: svr.URL,
+		BaseUrl: svr.URL,
 		Patterns: []*regexp.Regexp{
 			regexp.MustCompile("(?i)(sony|sigma)"),
 			regexp.MustCompile("(?i)50(mm)?"),

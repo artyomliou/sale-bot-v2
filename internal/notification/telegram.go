@@ -9,17 +9,21 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"net/url"
 )
+
+const TelegramBaseUrl = "https://api.telegram.org"
 
 type telegramNotifier struct {
 	logger    *log.Logger
-	url       string
+	baseUrl   string
+	botKey    string
 	channelId int
 }
 
-func NewTelegramNotifier(host, botKey string, channelID int) (*telegramNotifier, error) {
-	if host == "" {
-		host = "https://api.telegram.org"
+func NewTelegramNotifier(baseUrl, botKey string, channelID int) (*telegramNotifier, error) {
+	if baseUrl == "" {
+		baseUrl = TelegramBaseUrl
 	}
 	if botKey == "" {
 		return nil, errors.New("bot key cannot be empty")
@@ -29,9 +33,15 @@ func NewTelegramNotifier(host, botKey string, channelID int) (*telegramNotifier,
 	}
 	return &telegramNotifier{
 		logger:    utils.NewModuleLogger("telegram"),
-		url:       fmt.Sprintf("%s/bot%s/sendMessage", host, botKey),
+		baseUrl:   baseUrl,
+		botKey:    botKey,
 		channelId: channelID,
 	}, nil
+}
+
+func (n *telegramNotifier) sendMessageUrl() string {
+	u, _ := url.JoinPath(n.baseUrl, fmt.Sprintf("bot%s", n.botKey), "sendMessage")
+	return u
 }
 
 func (n *telegramNotifier) SendMessage(ctx context.Context, text string) error {
@@ -57,7 +67,7 @@ func (n *telegramNotifier) SendMessage(ctx context.Context, text string) error {
 		return errorWrapper(err)
 	}
 
-	req, err := http.NewRequestWithContext(ctx, http.MethodPost, n.url, &buf)
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, n.sendMessageUrl(), &buf)
 	if err != nil {
 		return errorWrapper(err)
 	}

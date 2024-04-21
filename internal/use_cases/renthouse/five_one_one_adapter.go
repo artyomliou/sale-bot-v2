@@ -151,7 +151,7 @@ func (a FiveNineOneAdapter) GetCrawler() crawlers.Crawler {
 	}
 
 	crawler := crawlers.NewFiveNineOneCrawler()
-	crawler.BaseUrl = "https://rent.591.com.tw"
+	crawler.BaseUrl = crawlers.FiveNineOneBaseUrl
 	crawler.Queries = queries
 	return crawler
 }

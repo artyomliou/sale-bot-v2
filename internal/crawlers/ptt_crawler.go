@@ -3,9 +3,9 @@ package crawlers
 import (
 	"artyomliou/sale-bot-v2/internal/utils"
 	"context"
-	"fmt"
 	"log"
 	"net/http"
+	"net/url"
 	"regexp"
 	"strings"
 
@@ -13,9 +13,12 @@ import (
 	"golang.org/x/net/html"
 )
 
+const PttBaseUrl = "https://www.ptt.cc"
+
 type PttCrawler struct {
 	logger   *log.Logger
-	Url      string
+	BaseUrl  string
+	Board    string
 	Patterns []*regexp.Regexp
 }
 
@@ -25,18 +28,19 @@ func NewPttCrawler() *PttCrawler {
 	}
 }
 
-func PttBoardUrl(board string) string {
-	return fmt.Sprintf("https://www.ptt.cc/bbs/%s/index.html", board)
+func (c *PttCrawler) boardIndexUrl() string {
+	res, _ := url.JoinPath(c.BaseUrl, "bbs", c.Board, "index.html")
+	return res
 }
 
 func (c *PttCrawler) Crawl(ctx context.Context, results *[]*Page) {
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, c.Url, nil)
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, c.boardIndexUrl(), nil)
 	if err != nil {
 		c.logger.Printf("failed to init a request: %v", err)
 		return
 	}
 
-	c.logger.Printf("crawling %s...", c.Url)
+	c.logger.Printf("crawling %s...", c.boardIndexUrl())
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		c.logger.Printf("failed to request a target: %v", err)
@@ -64,7 +68,7 @@ func (c *PttCrawler) Crawl(ctx context.Context, results *[]*Page) {
 		title := s.Find("a").Text()
 		crawledPages = append(crawledPages, &Page{
 			ID:    link,
-			Link:  "https://www.ptt.cc" + link,
+			Link:  PttBaseUrl + link,
 			Title: title,
 		})
 	})

@@ -14,7 +14,8 @@ type PttCrawlerRentApartAdapter struct {
 
 func (a PttCrawlerRentApartAdapter) GetCrawler() crawlers.Crawler {
 	crawler := crawlers.NewPttCrawler()
-	crawler.Url = "https://www.ptt.cc/bbs/rent_apart/index.html"
+	crawler.BaseUrl = crawlers.PttBaseUrl
+	crawler.Board = "rent_apart"
 	crawler.Patterns = []*regexp.Regexp{}
 
 	if len(a.Districts) > 0 {

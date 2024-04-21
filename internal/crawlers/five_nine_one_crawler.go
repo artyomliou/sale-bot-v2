@@ -16,6 +16,9 @@ import (
 	"golang.org/x/net/html"
 )
 
+const FiveNineOneBaseUrl = "https://rent.591.com.tw"
+const UserAgent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0"
+
 type FiveNineOneCrawler struct {
 	logger  *log.Logger
 	BaseUrl string
@@ -25,23 +28,39 @@ type FiveNineOneCrawler struct {
 func NewFiveNineOneCrawler() *FiveNineOneCrawler {
 	return &FiveNineOneCrawler{
 		logger:  utils.NewModuleLogger("FiveNineOneCrawler"),
-		BaseUrl: "https://rent.591.com.tw",
+		BaseUrl: FiveNineOneBaseUrl,
 		Queries: url.Values{},
 	}
+}
+
+func (c *FiveNineOneCrawler) indexUrl() string {
+	indexUrl := c.BaseUrl + "/?" + c.Queries.Encode()
+	indexUrl = strings.Replace(indexUrl, "%2C", ",", -1)
+	return indexUrl
+}
+
+func (c *FiveNineOneCrawler) apiUrl() string {
+	apiUrl, _ := url.JoinPath(c.BaseUrl, "/home/search/rsList")
+	apiUrl = apiUrl + "?" + c.Queries.Encode()
+	apiUrl = strings.Replace(apiUrl, "%2C", ",", -1)
+	return apiUrl
+}
+
+func (c *FiveNineOneCrawler) pageUrl(postId int) string {
+	pageUrl, _ := url.JoinPath(c.BaseUrl, fmt.Sprintf("rent-detail-%d.html", postId))
+	return pageUrl
 }
 
 func (c *FiveNineOneCrawler) Crawl(ctx context.Context, results *[]*Page) {
 	cookies := []*http.Cookie{}
 	headers := http.Header{}
-	headers["User-Agent"] = []string{"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0"}
+	headers["User-Agent"] = []string{UserAgent}
 
-	pageUrl := fmt.Sprintf("%s/?%s", c.BaseUrl, c.Queries.Encode())
-	pageUrl = strings.Replace(pageUrl, "%2C", ",", -1)
-	c.crawlHtmlForCsrfTokenAndCookie(ctx, pageUrl, &headers, &cookies)
+	c.crawlHtmlForCsrfTokenAndCookie(ctx, &headers, &cookies)
 
 	// Prepare for API call
 	headers["device"] = []string{"pc"}
-	headers["Referer"] = []string{pageUrl}
+	headers["Referer"] = []string{c.indexUrl()}
 	headers["Accpet"] = []string{"application/json, text/javascript, */*; q=0.01"}
 	headers["Accept-Language"] = []string{"en-US,en;q=0.5"}
 	headers["DNT"] = []string{"1"}
@@ -51,9 +70,7 @@ func (c *FiveNineOneCrawler) Crawl(ctx context.Context, results *[]*Page) {
 	page := 1
 	const PerPageRows = 30
 	for {
-		apiUrl := fmt.Sprintf("%s/home/search/rsList?%s", c.BaseUrl, c.Queries.Encode())
-		apiUrl = strings.Replace(apiUrl, "%2C", ",", -1)
-		totalRows := c.crawlApi(ctx, apiUrl, &headers, &cookies, results)
+		totalRows := c.crawlApi(ctx, &headers, &cookies, results)
 		if totalRows == 0 {
 			break
 		}
@@ -66,8 +83,8 @@ func (c *FiveNineOneCrawler) Crawl(ctx context.Context, results *[]*Page) {
 	}
 }
 
-func (c *FiveNineOneCrawler) crawlHtmlForCsrfTokenAndCookie(ctx context.Context, url string, headers *http.Header, cookies *[]*http.Cookie) {
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
+func (c *FiveNineOneCrawler) crawlHtmlForCsrfTokenAndCookie(ctx context.Context, headers *http.Header, cookies *[]*http.Cookie) {
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, c.indexUrl(), nil)
 	if err != nil {
 		c.logger.Printf("failed to new request %s", err)
 		return
@@ -79,7 +96,7 @@ func (c *FiveNineOneCrawler) crawlHtmlForCsrfTokenAndCookie(ctx context.Context,
 	// c.logger.Printf("%s\n", bytes)
 
 	// Send
-	c.logger.Printf("crawling %s...", url)
+	c.logger.Printf("crawling %s...", c.indexUrl())
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		c.logger.Printf("failed to request a target: %v", err)
@@ -128,8 +145,8 @@ func (c *FiveNineOneCrawler) crawlHtmlForCsrfTokenAndCookie(ctx context.Context,
 	}
 }
 
-func (c *FiveNineOneCrawler) crawlApi(ctx context.Context, url string, headers *http.Header, cookies *[]*http.Cookie, results *[]*Page) int {
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
+func (c *FiveNineOneCrawler) crawlApi(ctx context.Context, headers *http.Header, cookies *[]*http.Cookie, results *[]*Page) int {
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, c.apiUrl(), nil)
 	if err != nil {
 		c.logger.Printf("failed to new request %s", err)
 		return 0
@@ -144,7 +161,7 @@ func (c *FiveNineOneCrawler) crawlApi(ctx context.Context, url string, headers *
 	// c.logger.Printf("%s\n", reqBytes)
 
 	// Send
-	c.logger.Printf("crawling %s...", url)
+	c.logger.Printf("crawling %s...", c.apiUrl())
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		c.logger.Printf("failed to request a target: %v", err)
@@ -186,7 +203,7 @@ func (c *FiveNineOneCrawler) crawlApi(ctx context.Context, url string, headers *
 		*results = append(*results, &Page{
 			ID:    fmt.Sprintf("591-%d", obj.PostId),
 			Title: obj.Title,
-			Link:  fmt.Sprintf("https://rent.591.com.tw/rent-detail-%d.html", obj.PostId),
+			Link:  c.pageUrl(obj.PostId),
 		})
 	}
 
