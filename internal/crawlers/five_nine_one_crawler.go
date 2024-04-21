@@ -201,9 +201,10 @@ func (c *FiveNineOneCrawler) crawlApi(ctx context.Context, headers *http.Header,
 
 	for _, obj := range jsonResp.Data.Data {
 		*results = append(*results, &Page{
-			ID:    fmt.Sprintf("591-%d", obj.PostId),
-			Title: obj.Title,
-			Link:  c.pageUrl(obj.PostId),
+			ID:                fmt.Sprintf("591-%d", obj.PostId),
+			Link:              c.pageUrl(obj.PostId),
+			Title:             obj.Title,
+			NotificationTitle: fmt.Sprintf("591 [%s] %s %s %s", obj.SectionName, obj.RoomStr, obj.FloorStr, obj.Price),
 		})
 	}
 

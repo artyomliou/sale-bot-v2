@@ -27,6 +27,7 @@ func NewConnection(dbPath string) (*DbConnection, error) {
 
 	dbMigrations := []dbMigration{
 		&createPagesTableMigration{},
+		&addNotificationTitleMigration{},
 	}
 	for _, m := range dbMigrations {
 		if err := m.Up(db); err != nil {

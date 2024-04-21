@@ -11,7 +11,8 @@ type CrawlerAdapter interface {
 }
 
 type Page struct {
-	ID    string
-	Link  string
-	Title string
+	ID                string
+	Link              string
+	Title             string
+	NotificationTitle string
 }

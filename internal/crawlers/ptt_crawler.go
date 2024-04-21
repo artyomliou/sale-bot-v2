@@ -68,9 +68,10 @@ func (c *PttCrawler) Crawl(ctx context.Context, results *[]*Page) {
 		}
 		title := s.Find("a").Text()
 		crawledPages = append(crawledPages, &Page{
-			ID:    fmt.Sprintf("ptt-%s", link),
-			Link:  PttBaseUrl + link,
-			Title: title,
+			ID:                fmt.Sprintf("ptt-%s", link),
+			Link:              PttBaseUrl + link,
+			Title:             title,
+			NotificationTitle: fmt.Sprintf("ptt %s", title),
 		})
 	})
 

@@ -22,3 +22,24 @@ func (m *createPagesTableMigration) Up(db *sql.DB) error {
 	}
 	return nil
 }
+
+type addNotificationTitleMigration struct{}
+
+func (m *addNotificationTitleMigration) Up(db *sql.DB) error {
+	var exists int
+	row := db.QueryRow(`select count(*) from pragma_table_info('pages') where name = 'notification_title';`)
+	if err := row.Scan(&exists); err != nil {
+		return err
+	}
+	if exists == 1 {
+		return nil
+	}
+
+	_, err := db.Exec(`
+		ALTER TABLE pages ADD notification_title TEXT;
+	`)
+	if err != nil {
+		return err
+	}
+	return nil
+}
