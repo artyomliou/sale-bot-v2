@@ -25,16 +25,13 @@ func NewConnection(dbPath string) (*DbConnection, error) {
 		return nil, err
 	}
 
-	_, err = db.Exec(`
-		CREATE TABLE IF NOT EXISTS pages (
-			id TEXT PRIMARY KEY,
-			title TEXT NOT NULL,
-			link TEXT NOT NULL,
-			created_at INTEGER NOT NULL
-		);
-	`)
-	if err != nil {
-		return nil, err
+	dbMigrations := []dbMigration{
+		&createPagesTableMigration{},
+	}
+	for _, m := range dbMigrations {
+		if err := m.Up(db); err != nil {
+			return nil, err
+		}
 	}
 
 	return &DbConnection{
