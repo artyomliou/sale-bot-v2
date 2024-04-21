@@ -108,7 +108,7 @@ func (c *FiveNineOneCrawler) crawlHtmlForCsrfTokenAndCookie(ctx context.Context,
 		return
 	}
 	if !strings.Contains(resp.Header.Get("Content-Type"), "text/html") {
-		c.logger.Printf("Response of target is not HTML: %v", err)
+		c.logger.Print("Response of target is not HTML")
 		return
 	}
 
@@ -200,12 +200,14 @@ func (c *FiveNineOneCrawler) crawlApi(ctx context.Context, headers *http.Header,
 	}
 
 	for _, obj := range jsonResp.Data.Data {
-		*results = append(*results, &Page{
+		page := &Page{
 			ID:                fmt.Sprintf("591-%d", obj.PostId),
 			Link:              c.pageUrl(obj.PostId),
 			Title:             obj.Title,
 			NotificationTitle: fmt.Sprintf("591 [%s] %s %s %s", obj.SectionName, obj.RoomStr, obj.FloorStr, obj.Price),
-		})
+			PhotoUrls:         obj.PhotoList,
+		}
+		*results = append(*results, page)
 	}
 
 	if jsonResp.Data.Records != "" {

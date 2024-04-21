@@ -33,13 +33,11 @@ func TestTelegram(t *testing.T) {
 	ctx, cancelFunc := context.WithCancel(context.Background())
 	defer cancelFunc()
 
-	text := notification.PagesToHtml([]*crawlers.Page{
-		{
-			Title: "Testing title",
-			Link:  "https://www.ptt.cc/bbs/DC_SALE/M.1691245105.A.729.html",
-		},
+	text := notification.PageToTelegramMessageText(&crawlers.Page{
+		Title: "Testing title",
+		Link:  "https://www.ptt.cc/bbs/DC_SALE/M.1691245105.A.729.html",
 	})
-	err = notifier.SendMessage(ctx, text)
+	err = notifier.SendMessage(ctx, text, "")
 	if err != nil {
 		t.Fatal(err)
 	}

@@ -44,24 +44,21 @@ func (n *telegramNotifier) sendMessageUrl() string {
 	return u
 }
 
-func (n *telegramNotifier) SendMessage(ctx context.Context, text string) error {
-	type payload struct {
-		ChatId                int    `json:"chat_id"`
-		Text                  string `json:"text"`
-		ParseMode             string `json:"parse_mode"`
-		DisableWebPagePreview bool   `json:"disable_web_page_preview"`
-	}
-
+func (n *telegramNotifier) SendMessage(ctx context.Context, text string, photoUrl string) error {
 	errorWrapper := func(err error) error {
 		return fmt.Errorf("send message error: %s", err.Error())
 	}
 
 	var buf bytes.Buffer
-	body := payload{
-		ChatId:                int(n.channelId),
-		Text:                  text,
-		ParseMode:             "HTML",
-		DisableWebPagePreview: true,
+	body := sendMessagePayload{
+		ChatId:              int(n.channelId),
+		Text:                text,
+		ParseMode:           "HTML",
+		DisableNotification: false,
+		LinkPreviewOptions: linkPreviewOptions{
+			IsDisabled: photoUrl == "",
+			Url:        photoUrl,
+		},
 	}
 	if err := json.NewEncoder(&buf).Encode(&body); err != nil {
 		return errorWrapper(err)
@@ -80,4 +77,16 @@ func (n *telegramNotifier) SendMessage(ctx context.Context, text string) error {
 	}
 	n.logger.Printf("status code: %d", resp.StatusCode)
 	return nil
+}
+
+type linkPreviewOptions struct {
+	IsDisabled bool   `json:"is_disabled"`
+	Url        string `json:"url"`
+}
+type sendMessagePayload struct {
+	ChatId              int                `json:"chat_id"`
+	Text                string             `json:"text"`
+	ParseMode           string             `json:"parse_mode"`
+	DisableNotification bool               `json:"disable_notification"`
+	LinkPreviewOptions  linkPreviewOptions `json:"link_preview_options"`
 }

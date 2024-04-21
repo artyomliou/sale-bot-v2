@@ -3,7 +3,9 @@ package crawlers
 import (
 	"artyomliou/sale-bot-v2/internal/utils"
 	"context"
+	"errors"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"net/url"
@@ -48,7 +50,7 @@ func (c *PttCrawler) Crawl(ctx context.Context, results *[]*Page) {
 		return
 	}
 	if !strings.Contains(resp.Header.Get("Content-Type"), "text/html") {
-		c.logger.Printf("Response of target is not HTML: %v", err)
+		c.logger.Print("Response of target is not HTML")
 		return
 	}
 
@@ -88,5 +90,42 @@ func (c *PttCrawler) Crawl(ctx context.Context, results *[]*Page) {
 		}
 	}
 
+	for _, page := range matchedPages {
+		if err := c.crawlSpecificPageForMoreData(ctx, page); err != nil {
+			c.logger.Printf("failed to crawl specific page: %s", err)
+		}
+	}
+
 	*results = append(*results, matchedPages...)
+}
+
+func (c *PttCrawler) crawlSpecificPageForMoreData(ctx context.Context, page *Page) error {
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, page.Link, nil)
+	if err != nil {
+		return err
+	}
+
+	c.logger.Printf("crawling %s...", page.Link)
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return err
+	}
+	if !strings.Contains(resp.Header.Get("Content-Type"), "text/html") {
+		return errors.New("response of target is not HTML")
+	}
+
+	// parse photos
+	bytes, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return err
+	}
+	pattern, err := regexp.Compile("(?i)https://i.imgur.com/[0-9A-Z]+.(?:jpg|jpeg|png)")
+	if err != nil {
+		return err
+	}
+	matched := pattern.FindAllString(string(bytes), -1)
+	if len(matched) > 0 {
+		page.PhotoUrls = matched
+	}
+	return nil
 }

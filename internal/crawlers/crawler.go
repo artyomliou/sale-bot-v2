@@ -15,4 +15,5 @@ type Page struct {
 	Link              string
 	Title             string
 	NotificationTitle string
+	PhotoUrls         []string
 }

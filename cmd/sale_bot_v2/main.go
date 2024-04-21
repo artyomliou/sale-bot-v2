@@ -142,8 +142,16 @@ func main() {
 			}
 			if len(notifyPages) > 0 {
 				logger.Printf("will send %d pages to telegram", len(notifyPages))
-				if err := telegramNotifier.SendMessage(ctx, notification.PagesToHtml(notifyPages)); err != nil {
-					logger.Print(err)
+				for _, page := range notifyPages {
+					logger.Printf("sending %s to telegram", page.ID)
+					// pick one photo as preview if exists
+					photoUrl := ""
+					if len(page.PhotoUrls) > 0 {
+						photoUrl = page.PhotoUrls[0]
+					}
+					if err := telegramNotifier.SendMessage(ctx, notification.PageToTelegramMessageText(page), photoUrl); err != nil {
+						logger.Print(err)
+					}
 				}
 			}
 
