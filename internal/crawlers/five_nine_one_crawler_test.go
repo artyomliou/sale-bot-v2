@@ -57,7 +57,7 @@ func TestFiveNineOneCrawler(t *testing.T) {
 	if crawler, ok := c.(*crawlers.FiveNineOneCrawler); ok {
 		crawler.BaseUrl = svr.URL
 		results := []*crawlers.Page{}
-		c.Crawl(context.TODO(), &results)
+		c.Crawl(context.Background(), &results)
 
 		assert.Equal(t, 6, len(results))
 	} else {

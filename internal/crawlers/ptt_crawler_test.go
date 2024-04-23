@@ -35,7 +35,7 @@ func TestPttCrawler(t *testing.T) {
 	}
 
 	results := []*crawlers.Page{}
-	c.Crawl(context.TODO(), &results)
+	c.Crawl(context.Background(), &results)
 	t.Logf("%+v", results)
 	assert.Equal(t, 1, len(results))
 }

@@ -11,16 +11,35 @@ import (
 	"flag"
 	"os"
 	"os/signal"
-	"syscall"
+	"sync"
 	"time"
 )
 
 var telegramBotKey string
 var telegramChannelId int
+var once sync.Once
 
 func init() {
 	flag.StringVar(&telegramBotKey, "tgBotKey", "", "telegram bot key")
 	flag.IntVar(&telegramChannelId, "tgChannelId", 0, "telegram channel id")
+}
+
+func setupTerminableContext() context.Context {
+	var ctx context.Context
+
+	once.Do(func() {
+		var cancel context.CancelFunc
+		var sig chan os.Signal
+		ctx, cancel = context.WithCancel(context.Background())
+		sig = make(chan os.Signal, 1)
+		signal.Notify(sig, os.Interrupt)
+		go func() {
+			<-sig
+			cancel()
+		}()
+	})
+
+	return ctx
 }
 
 func main() {
@@ -29,17 +48,9 @@ func main() {
 		flag.Usage()
 		os.Exit(1)
 	}
-	logger := utils.NewModuleLogger("main")
-	ctx, cancelFunc := context.WithCancel(context.Background())
 
-	// Capture CTRL+C
-	exitSignal := make(chan os.Signal, 1)
-	signal.Notify(exitSignal, os.Interrupt, syscall.SIGTERM)
-	go func() {
-		<-exitSignal
-		logger.Print("stopping")
-		cancelFunc()
-	}()
+	logger := utils.NewModuleLogger("main")
+	ctx := setupTerminableContext()
 
 	// Initialize...
 	conn, err := db.NewConnection("db.sqlite")
@@ -113,7 +124,7 @@ func main() {
 		allCrawlers = append(allCrawlers, adapter.GetCrawler())
 	}
 
-	ticker := time.NewTicker(2 * time.Minute)
+	ticker := time.NewTicker(10 * time.Second)
 	for {
 		crawledPages := []*crawlers.Page{}
 		notifyPages := []*crawlers.Page{}
