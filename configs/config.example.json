@@ -9,10 +9,18 @@
   "targets": [
     {
       "type": "ptt_dc_sale",
-      "keywords": [
-        "28",
-        "70",
-        "rf"
+      "regex_patterns": [
+        "(?i)(canon|rf)",
+        "(?i)24(mm)?",
+        "(?i)(f)?1.8"
+      ]
+    },
+    {
+      "type": "ptt_dc_sale",
+      "regex_patterns": [
+        "(?i)(canon|rf)",
+        "(?i)35(mm)?",
+        "(?i)(f)?1.8"
       ]
     },
     {

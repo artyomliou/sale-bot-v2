@@ -55,6 +55,7 @@ func main() {
 	if err != nil {
 		logger.Fatal(err)
 	}
+	logger.Printf("%+v\n", adapters)
 
 	// Execute...
 	allCrawlers := []crawlers.Crawler{}
