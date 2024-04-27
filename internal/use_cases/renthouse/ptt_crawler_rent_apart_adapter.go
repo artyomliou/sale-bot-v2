@@ -7,9 +7,9 @@ import (
 )
 
 type PttCrawlerRentApartAdapter struct {
-	Cities    []City // fallback
-	Districts []District
-	Room      RoomCount
+	Cities    []City     `mapstructure:"cities"`
+	Districts []District `mapstructure:"districts"`
+	Room      RoomCount  `mapstructure:"room"`
 }
 
 func (a PttCrawlerRentApartAdapter) GetCrawler() crawlers.Crawler {

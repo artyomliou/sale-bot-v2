@@ -8,7 +8,7 @@ import (
 )
 
 type PttCrawlerDcSaleAdapter struct {
-	Keywords []string
+	Keywords []string `mapstructure:"keywords"`
 }
 
 func (a PttCrawlerDcSaleAdapter) GetCrawler() crawlers.Crawler {

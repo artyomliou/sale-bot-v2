@@ -1,28 +1,19 @@
 package main
 
 import (
+	"artyomliou/sale-bot-v2/configs"
 	"artyomliou/sale-bot-v2/internal/crawlers"
 	"artyomliou/sale-bot-v2/internal/db"
 	"artyomliou/sale-bot-v2/internal/notification"
-	"artyomliou/sale-bot-v2/internal/use_cases/camera"
-	"artyomliou/sale-bot-v2/internal/use_cases/renthouse"
 	"artyomliou/sale-bot-v2/internal/utils"
 	"context"
-	"flag"
 	"os"
 	"os/signal"
 	"sync"
 	"time"
 )
 
-var telegramBotKey string
-var telegramChannelId int
 var once sync.Once
-
-func init() {
-	flag.StringVar(&telegramBotKey, "tgBotKey", "", "telegram bot key")
-	flag.IntVar(&telegramChannelId, "tgChannelId", 0, "telegram channel id")
-}
 
 func setupTerminableContext() context.Context {
 	var ctx context.Context
@@ -34,8 +25,10 @@ func setupTerminableContext() context.Context {
 		sig = make(chan os.Signal, 1)
 		signal.Notify(sig, os.Interrupt)
 		go func() {
-			<-sig
-			cancel()
+			for {
+				<-sig
+				cancel()
+			}
 		}()
 	})
 
@@ -43,14 +36,9 @@ func setupTerminableContext() context.Context {
 }
 
 func main() {
-	flag.Parse()
-	if telegramBotKey == "" || telegramChannelId == 0 {
-		flag.Usage()
-		os.Exit(1)
-	}
-
 	logger := utils.NewModuleLogger("main")
 	ctx := setupTerminableContext()
+	cfg := configs.GetConfig()
 
 	// Initialize...
 	conn, err := db.NewConnection("db.sqlite")
@@ -58,67 +46,17 @@ func main() {
 		logger.Fatal(err)
 	}
 
-	telegramNotifier, err := notification.NewTelegramNotifier("", telegramBotKey, telegramChannelId)
+	telegramNotifier, err := notification.NewTelegramNotifier("", cfg.Telegram.BotKey, cfg.Telegram.ChannelId)
 	if err != nil {
 		logger.Fatal(err)
 	}
 
-	// All crawling stuff
-	adapters := []crawlers.CrawlerAdapter{
-		camera.PttCrawlerDcSaleAdapter{
-			Keywords: []string{
-				"canon",
-				"RF",
-				"50",
-				"f1.8",
-			},
-		},
-		renthouse.PttCrawlerRentApartAdapter{
-			Cities: []renthouse.City{
-				renthouse.NewTaipei,
-			},
-			Districts: []renthouse.District{
-				renthouse.Banqiao,
-				renthouse.Xinzhuang,
-				renthouse.Sanchong,
-				renthouse.Luzhou,
-				renthouse.Zhonghe,
-			},
-			Room: renthouse.TwoRooms,
-		},
-		renthouse.FiveNineOneAdapter{
-			City: renthouse.NewTaipei,
-			Districts: []renthouse.District{
-				renthouse.Banqiao,
-				renthouse.Xinzhuang,
-				renthouse.Sanchong,
-				renthouse.Luzhou,
-				renthouse.Zhonghe,
-			},
-			Kind: renthouse.Apartment,
-			Room: []renthouse.RoomCount{
-				renthouse.TwoRooms,
-				renthouse.ThreeRooms,
-			},
-			PriceRange: &renthouse.Range{
-				Min: 20000,
-				Max: 30000,
-			},
-			FloorRange: &renthouse.Range{
-				Min: 1,
-				Max: 10,
-			},
-			Options: []renthouse.Option{
-				renthouse.AirConditioner,
-				renthouse.Balcony,
-				renthouse.NoRoofTop,
-				renthouse.Refrigerator,
-				renthouse.WashingMachine,
-				renthouse.WaterHeater,
-			},
-		},
+	adapters, err := cfg.GetAdapters()
+	if err != nil {
+		logger.Fatal(err)
 	}
 
+	// Execute...
 	allCrawlers := []crawlers.Crawler{}
 	for _, adapter := range adapters {
 		allCrawlers = append(allCrawlers, adapter.GetCrawler())

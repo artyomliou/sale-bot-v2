@@ -8,13 +8,13 @@ import (
 )
 
 type FiveNineOneAdapter struct {
-	City       City
-	Districts  []District
-	Kind       Kind
-	Room       []RoomCount
-	PriceRange *Range
-	FloorRange *Range
-	Options    []Option
+	City       City        `mapstructure:"city"`
+	Districts  []District  `mapstructure:"districts"`
+	Kind       Kind        `mapstructure:"kind"`
+	Room       []RoomCount `mapstructure:"room"`
+	PriceRange *Range      `mapstructure:"price_range"`
+	FloorRange *Range      `mapstructure:"floor_range"`
+	Options    []Option    `mapstructure:"options"`
 }
 
 type Range struct {

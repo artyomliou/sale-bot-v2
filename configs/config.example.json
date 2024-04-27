@@ -1,0 +1,65 @@
+{
+  "telegram": {
+    "bot_key": "asd912309iad",
+    "channel_id": 123456
+  },
+  "db": {
+    "sqlite_file": "db.sqlite"
+  },
+  "targets": [
+    {
+      "type": "ptt_dc_sale",
+      "keywords": [
+        "28",
+        "70",
+        "rf"
+      ]
+    },
+    {
+      "type": "ptt_rent_apart",
+      "cities": [
+        "新北"
+      ],
+      "districts": [
+        "板橋",
+        "新莊",
+        "三重",
+        "蘆洲",
+        "中和"
+      ],
+      "room": "兩房"
+    },
+    {
+      "type": "five_nine_one",
+      "city": "新北",
+      "districts": [
+        "板橋",
+        "新莊",
+        "三重",
+        "蘆洲",
+        "中和"
+      ],
+      "kind": "家庭式",
+      "room": [
+        "兩房",
+        "三房"
+      ],
+      "price_range": {
+        "min": 20000,
+        "max": 30000
+      },
+      "floor_range": {
+        "min": 1,
+        "max": 10
+      },
+      "options": [
+        "冷氣",
+        "陽台",
+        "非頂樓加蓋",
+        "冰箱",
+        "洗衣機",
+        "熱水器"
+      ]
+    }
+  ]
+}
