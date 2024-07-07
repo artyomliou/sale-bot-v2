@@ -3,6 +3,7 @@ package configs
 import (
 	"artyomliou/sale-bot-v2/internal/crawlers"
 	"artyomliou/sale-bot-v2/internal/use_cases/camera"
+	"artyomliou/sale-bot-v2/internal/use_cases/pc"
 	"artyomliou/sale-bot-v2/internal/use_cases/renthouse"
 	"encoding/json"
 	"log"
@@ -56,6 +57,12 @@ func (cfg *Config) GetAdapters() ([]crawlers.CrawlerAdapter, error) {
 		switch target["type"].(string) {
 		case "ptt_dc_sale":
 			var adapter camera.PttCrawlerDcSaleAdapter
+			if err := decodeAdapter(target, &adapter); err != nil {
+				return nil, err
+			}
+			adapters = append(adapters, adapter)
+		case "ptt_hardware_sale":
+			var adapter pc.PttCrawlerHardwareSaleAdapter
 			if err := decodeAdapter(target, &adapter); err != nil {
 				return nil, err
 			}

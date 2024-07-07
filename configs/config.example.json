@@ -24,6 +24,14 @@
       ]
     },
     {
+      "type": "ptt_hardware_sale",
+      "regex_patterns": [
+        "(?i)(b350|b370|b450|b470|b550|b570)",
+        "(?i)i(tx)?",
+        "(?i)賣"
+      ]
+    },
+    {
       "type": "ptt_rent_apart",
       "cities": [
         "新北"
