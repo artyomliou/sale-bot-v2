@@ -1,0 +1,21 @@
+[Unit]
+Description=sale bot v2 service
+After=network.target
+
+[Service]
+User=1000
+WorkingDirectory=/opt/sale_bot_v2
+Type=simple
+
+ExecStart=/opt/sale_bot_v2/sale_bot_v2
+ExecStop=/bin/kill -s QUIT $MAINPID
+Restart=always
+RestartSec=10
+ReadWriteDirectories=-/var/run
+ReadWriteDirectories=-/var/log
+
+StandardOutput=append:/var/log/sale_bot_v2.log
+StandardError=append:/var/log/sale_bot_v2.log
+
+[Install]
+WantedBy=multi-user.target
